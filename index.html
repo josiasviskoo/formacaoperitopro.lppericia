@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Digital Clinics – Médicos Especialistas em Emagrecimento</title>
+<title>Formação Perito Pro – LPPerícia</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -675,6 +675,57 @@ footer p { font-size: 11px; color: #3a3a3a; }
   .hero-actions { flex-direction: column; }
   footer { flex-direction: column; align-items: flex-start; }
 }
+
+/* ─── ABOUT PHOTO ─── */
+.about-card { position: relative; }
+.about-photo {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 16px;
+}
+
+/* ─── CLIENTES ALUNOS ─── */
+.hero-social-proof img.alunos-img {
+  height: 38px;
+  width: auto;
+  display: block;
+}
+
+/* ─── PROVAS SOCIAIS ─── */
+.social-proof { background: var(--black); }
+.social-proof-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.ps-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+.ps-item {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  transition: border-color 0.25s, transform 0.25s;
+  cursor: default;
+}
+.ps-item:hover {
+  border-color: rgba(200,145,61,0.45);
+  transform: translateY(-4px);
+}
+.ps-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 860px) {
+  .ps-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 540px) {
+  .ps-grid { grid-template-columns: repeat(2, 1fr); }
+}
 </style>
 </head>
 <body>
@@ -682,11 +733,11 @@ footer p { font-size: 11px; color: #3a3a3a; }
 <!-- ─── NAVBAR ─── -->
 <nav>
   <a href="#" class="logo">
-    <div class="logo-mark">D</div>
-    Digital<em>Clinics</em>
+    <div class="logo-mark">P</div>
+    LP<em>Perícia</em>
   </a>
   <a href="#" class="btn-primary">
-    Quero Meu Diagnóstico <span class="arr">→</span>
+    Quero Me Inscrever <span class="arr">→</span>
   </a>
 </nav>
 
@@ -695,26 +746,21 @@ footer p { font-size: 11px; color: #3a3a3a; }
   <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="hero-eyebrow fade-up">
-      <span></span> Método validado por médicos especialistas
+      <span></span> Protocolo Forense Internacional com IA
     </div>
     <h1 class="fade-up delay-1">
-      Médicos Lotando a Agenda<br>
-      <span class="accent">e Faturando Alto com<br>Seus Protocolos</span>
+      Construa uma <span class="accent">Carreira Sólida<br>na Perícia Judicial</span> e gere renda<br>com honorários justos
     </h1>
     <p class="hero-sub fade-up delay-2">
-      Receba um plano de ação gratuito, validado e personalizado para atrair pacientes todos os dias — mesmo sem ser famoso no Instagram.
+      Abandone o improviso e utilize o mesmo protocolo de exames dos peritos do FBI. Com o nosso software exclusivo para a grafoscopia, você atua com segurança e elabora laudos fantásticos, mesmo começando do zero.
     </p>
     <div class="hero-actions fade-up delay-3">
-      <a href="#" class="btn-primary">Quero Fazer Meu Diagnóstico <span class="arr">→</span></a>
+      <a href="#" class="btn-primary">Quero Me Inscrever <span class="arr">→</span></a>
       <a href="#o-que-receber" class="btn-secondary">Saiba Mais</a>
     </div>
     <div class="hero-social-proof fade-up delay-4">
-      <div class="avatars">
-        <div class="avatar">CM</div>
-        <div class="avatar" style="background:linear-gradient(135deg,#3a3a3a,#666);">RB</div>
-        <div class="avatar" style="background:linear-gradient(135deg,#444,#777);">LF</div>
-      </div>
-      <p>+200 médicos especialistas já transformaram seus resultados</p>
+      <img src="assets/clientes-alunos.png" alt="+5000 alunos especialistas" class="alunos-img">
+      <p>+5000 alunos especialistas já transformaram suas carreiras</p>
     </div>
   </div>
   <!-- decorative silhouettes -->
@@ -726,37 +772,30 @@ footer p { font-size: 11px; color: #3a3a3a; }
 
 <div class="divider"><div class="divider-dot"></div></div>
 
-<!-- ─── O QUE VOCÊ VAI RECEBER ─── -->
+<!-- ─── O FIM DO IMPROVISO ─── -->
 <section class="what" id="o-que-receber">
   <div class="wrap">
     <div class="what-grid">
       <div class="what-visual">
         <div class="what-card">
-          <div class="badge-corner">↗</div>
-          <div class="what-card-inner">
-            <svg width="240" height="180" viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="20" y="30" width="90" height="120" rx="8" fill="#C8913D" fill-opacity="0.3" stroke="#C8913D" stroke-opacity="0.4" stroke-width="1"/>
-              <rect x="130" y="60" width="90" height="120" rx="8" fill="#888" fill-opacity="0.15" stroke="#555" stroke-width="1"/>
-              <circle cx="65" cy="20" r="16" fill="#555"/>
-              <circle cx="175" cy="50" r="16" fill="#444"/>
-              <line x1="20" y1="168" x2="220" y2="168" stroke="#333" stroke-width="1"/>
-            </svg>
+          <div class="what-card-inner" style="inset:0;position:absolute;">
+            <img src="assets/escritorio-de-perito.jpg" alt="Escritório de perito" style="width:100%;height:100%;object-fit:cover;opacity:0.7;">
           </div>
           <div class="what-card-overlay">
-            <p>Sessão estratégica individual com especialistas</p>
+            <p>Laudos impugnados geram prejuízos irreparáveis à sua carreira</p>
           </div>
         </div>
       </div>
 
       <div class="what-content">
-        <div class="section-tag">O que você recebe</div>
-        <h2 class="display">O que você está<br><em>prestes a receber</em></h2>
-        <p>Esta é uma sessão estratégica individual, feita com especialistas que são médicos como você, onde vamos te mostrar exatamente o que está travando o crescimento do seu consultório.</p>
-        <p>Você sairá com um plano de ação sob medida, estruturado por quem fatura alto com medicina e marketing digital.</p>
+        <div class="section-tag">O Problema</div>
+        <h2 class="display">O fim do <em>"improviso"</em><br>na Perícia Judicial</h2>
+        <p>Por que apostar sua carreira em métodos rasos é o caminho mais curto para o fracasso no Judiciário. <strong>Promessas vazias:</strong> fuja de cursos que oferecem ganhos fáceis sem base técnica sólida.</p>
+        <p><strong>Medo da impugnação, reputação em risco.</strong> Um erro amador pode manchar seu nome perante o Juiz para sempre. O mercado exige ciência forense — não opiniões sem fundamento.</p>
         <div class="highlight-line">
-          Sem enrolação. Sem fórmulas genéricas. Direto ao ponto.
+          Não brinque com a vida das pessoas: um simples erro do perito por falta de formação séria gera prejuízos enormes para quem busca a Justiça.
         </div>
-        <a href="#" class="btn-primary">Sim, Eu Quero Aumentar Meu Faturamento <span class="arr">→</span></a>
+        <a href="#" class="btn-primary">Quero Sair do Improviso <span class="arr">→</span></a>
       </div>
     </div>
   </div>
@@ -765,33 +804,33 @@ footer p { font-size: 11px; color: #3a3a3a; }
 <!-- ─── TICKER ─── -->
 <div class="ticker">
   <div class="ticker-track">
-    <span>DIGITAL CLINICS</span>
+    <span>FORMAÇÃO PERITO PRO</span>
     <span class="accent-tick">✦</span>
-    <span>DIGITAL CLINICS</span>
+    <span>FORMAÇÃO PERITO PRO</span>
     <span class="accent-tick">✦</span>
-    <span>DIGITAL CLINICS</span>
+    <span>FORMAÇÃO PERITO PRO</span>
     <span class="accent-tick">✦</span>
-    <span>DIGITAL CLINICS</span>
+    <span>FORMAÇÃO PERITO PRO</span>
     <span class="accent-tick">✦</span>
-    <span>DIGITAL CLINICS</span>
+    <span>FORMAÇÃO PERITO PRO</span>
     <span class="accent-tick">✦</span>
-    <span>DIGITAL CLINICS</span>
+    <span>FORMAÇÃO PERITO PRO</span>
     <span class="accent-tick">✦</span>
-    <span>DIGITAL CLINICS</span>
+    <span>FORMAÇÃO PERITO PRO</span>
     <span class="accent-tick">✦</span>
-    <span>DIGITAL CLINICS</span>
+    <span>FORMAÇÃO PERITO PRO</span>
     <span class="accent-tick">✦</span>
-    <span>DIGITAL CLINICS</span>
+    <span>FORMAÇÃO PERITO PRO</span>
     <span class="accent-tick">✦</span>
-    <span>DIGITAL CLINICS</span>
+    <span>FORMAÇÃO PERITO PRO</span>
     <span class="accent-tick">✦</span>
-    <span>DIGITAL CLINICS</span>
+    <span>FORMAÇÃO PERITO PRO</span>
     <span class="accent-tick">✦</span>
-    <span>DIGITAL CLINICS</span>
+    <span>FORMAÇÃO PERITO PRO</span>
     <span class="accent-tick">✦</span>
-    <span>DIGITAL CLINICS</span>
+    <span>FORMAÇÃO PERITO PRO</span>
     <span class="accent-tick">✦</span>
-    <span>DIGITAL CLINICS</span>
+    <span>FORMAÇÃO PERITO PRO</span>
     <span class="accent-tick">✦</span>
   </div>
 </div>
@@ -802,33 +841,33 @@ footer p { font-size: 11px; color: #3a3a3a; }
     <div class="for-who-grid">
       <div>
         <div class="section-tag">Para quem é</div>
-        <h2 class="display">Essa consultoria é <em>para médicos especialistas em emagrecimento</em> que:</h2>
+        <h2 class="display">Essa formação é <em>para quem busca uma segunda carreira sólida</em> na perícia judicial:</h2>
         <div class="for-who-cta-block">
-          Se você se encaixa em um ou mais desses pontos, essa sessão gratuita foi criada para você.
+          Para quem busca uma segunda carreira sólida, a aplicação de um Protocolo Forense Internacional assistido por tecnologia não é um diferencial: é a única escolha lógica.
         </div>
-        <a href="#" class="btn-primary">Sim, Eu Quero Aumentar Meu Faturamento <span class="arr">→</span></a>
+        <a href="#" class="btn-primary">Quero Me Inscrever <span class="arr">→</span></a>
       </div>
 
       <div>
         <div class="item-card">
           <div class="item-num">01</div>
-          <p>Querem atrair mais pacientes com previsibilidade</p>
+          <p>Quer atuar com segurança desde o primeiro laudo, sem medo de impugnação</p>
         </div>
         <div class="item-card">
           <div class="item-num">02</div>
-          <p>Desejam aumentar o faturamento com protocolos próprios de alto valor</p>
+          <p>Busca uma segunda carreira respeitada, trabalhando de casa com liberdade profissional</p>
         </div>
         <div class="item-card">
           <div class="item-num">03</div>
-          <p>Estão prontos para se posicionar como referência na área de emagrecimento</p>
+          <p>Quer dominar a grafoscopia e documentoscopia com método científico comprovado</p>
         </div>
         <div class="item-card">
           <div class="item-num">04</div>
-          <p>Sentem que estão fazendo tudo no digital, mas sem retorno real</p>
+          <p>Está pronto para usar Inteligência Artificial a serviço da perícia judicial</p>
         </div>
         <div class="item-card">
           <div class="item-num">05</div>
-          <p>Precisam organizar sua estrutura online e transformar audiência em consultas pagas</p>
+          <p>Deseja conquistar o Distintivo Perito Pro e ser reconhecido pelo Judiciário</p>
         </div>
       </div>
     </div>
@@ -842,41 +881,41 @@ footer p { font-size: 11px; color: #3a3a3a; }
   <div class="wrap">
     <div class="deliver-header">
       <div>
-        <div class="section-tag">O que será entregue</div>
-        <h2 class="display">O que você recebe na<br><em>sessão gratuita</em></h2>
+        <div class="section-tag">O que você recebe</div>
+        <h2 class="display">O que você recebe ao entrar na<br><em>Formação Perito Pro</em></h2>
       </div>
-      <p class="lead" style="max-width:320px;">Uma sessão com valor real de mercado, oferecida gratuitamente por tempo limitado.</p>
+      <p class="lead" style="max-width:320px;">O nome "Blindado" não é por acaso. Ele representa sua proteção total contra erros e riscos jurídicos através da tecnologia e do método.</p>
     </div>
 
     <div class="deliver-grid">
       <div class="d-card">
-        <div class="d-icon">🔍</div>
-        <h4>Diagnóstico completo do seu posicionamento atual</h4>
+        <div class="d-icon">🎓</div>
+        <h4>Metodologia de Elite — aprenda com um Perito Criminal com 22 anos de atuação no campo de batalha</h4>
       </div>
       <div class="d-card">
-        <div class="d-icon">📊</div>
-        <h4>Análise do seu funil de atração e conversão de pacientes</h4>
+        <div class="d-icon">🤖</div>
+        <h4>Software Exclusivo com IA — estruture seu raciocínio pericial e organize critérios técnicos com precisão</h4>
+      </div>
+      <div class="d-card">
+        <div class="d-icon">📄</div>
+        <h4>Laudos Automatizados — o software transforma seu exame em um laudo pericial robusto e bem fundamentado</h4>
+      </div>
+      <div class="d-card">
+        <div class="d-icon">🔬</div>
+        <h4>Laboratórios de Falsificação — aprenda como falsários atuam em casos reais e como peritos desvendam as fraudes</h4>
+      </div>
+      <div class="d-card">
+        <div class="d-icon">🏅</div>
+        <h4>Distintivo Perito Pro — símbolo máximo de proteção contra riscos jurídicos, reconhecido pelo Judiciário</h4>
       </div>
       <div class="d-card">
         <div class="d-icon">📱</div>
-        <h4>Estratégia de autoridade para o Instagram e canais complementares</h4>
-      </div>
-      <div class="d-card">
-        <div class="d-icon">📋</div>
-        <h4>Roteiro para vender seus protocolos com previsibilidade</h4>
-      </div>
-      <div class="d-card">
-        <div class="d-icon">🛠️</div>
-        <h4>Indicação das ferramentas certas para acelerar seu crescimento</h4>
-      </div>
-      <div class="d-card">
-        <div class="d-icon">🗓️</div>
-        <h4>Plano de ação personalizado, enviado ao final do call</h4>
+        <h4>Acesso por 360 dias via app — plataforma acessível para todos com certificado de 80 horas ao final</h4>
       </div>
     </div>
-    <p class="deliver-note">Essa sessão tem valor real de mercado — e ainda assim está sendo oferecida sem custo por tempo limitado.</p>
+    <p class="deliver-note">Acesso imediato após a inscrição · Certificado de 80 horas · Pagamento 100% seguro · Curso 100% Online</p>
     <div style="text-align:center;margin-top:32px;">
-      <a href="#" class="btn-primary">Quero o Meu Plano de Ação Gratuito <span class="arr">→</span></a>
+      <a href="#" class="btn-primary">Quero Me Inscrever Agora <span class="arr">→</span></a>
     </div>
   </div>
 </section>
@@ -886,31 +925,28 @@ footer p { font-size: 11px; color: #3a3a3a; }
   <div class="wrap">
     <div class="about-grid">
       <div>
-        <div class="section-tag">Quem somos</div>
-        <h2 class="display">Quem está por trás da <em>Digital Clinics?</em></h2>
-        <p style="font-weight:300;color:var(--text);margin-bottom:14px;">Somos Cristiano Furtado e Hugo Baduz — médicos de formação, mas <strong style="color:var(--white);font-weight:600;">estrategistas por vocação</strong>.</p>
-        <p style="font-weight:300;color:var(--text);">Nos últimos anos, nos especializamos em vendas online, estruturação de protocolos de alto valor e estratégias de crescimento para médicos especialistas.</p>
+        <div class="section-tag">Quem ensina</div>
+        <h2 class="display">Quem está por trás da <em>Formação Perito Pro?</em></h2>
+        <p style="font-weight:300;color:var(--text);margin-bottom:14px;">Sou <strong style="color:var(--white);font-weight:600;">Fábio Vasconcelos Braga</strong> — perito criminal com mais de 22 anos de atuação e uma das maiores referências técnicas no Brasil em análise documental e grafoscopia.</p>
+        <p style="font-weight:300;color:var(--text);">Minha carreira é pautada pelo rigor científico e pela aplicação de protocolos internacionais de elite para garantir a <em style="color:var(--gold-light);">"Ciência da Certeza"</em> em cada laudo emitido.</p>
         <ul class="check-list">
-          <li>Juntos, já faturamos múltiplos 7 dígitos com vendas digitais na área de saúde</li>
-          <li>Aplicamos cada estratégia em nossos próprios projetos antes de ensinar qualquer médico</li>
-          <li>A Digital Clinics nasceu para ajudar médicos a saírem da estagnação e construírem um negócio lucrativo e previsível</li>
-          <li>Estruture seus protocolos, conquiste autoridade real e atraia pacientes com consistência</li>
+          <li>Chefe da Seção de Crimes Contra a Pessoa do Instituto de Criminalística do DF, especialista em manchas de sangue</li>
+          <li>Formação nos protocolos do FBI (EUA), Rede Europeia de Ciências Forenses, Austrália e Nova Zelândia</li>
+          <li>Já capacitou centenas de peritos em Academias de Polícia de todo o Brasil, incluindo a Polícia Federal</li>
+          <li>Fundador da Escola LPPerícia e criador do software exclusivo com IA para padronizar e blindar laudos contra impugnações</li>
+          <li>Foi Diretor-Geral da Polícia Científica do DF, coordenando centenas de peritos na solução de casos complexos</li>
         </ul>
       </div>
 
       <div class="about-visual">
         <div class="about-card">
-          <div class="about-card-bg"></div>
+          <img src="assets/fabio-no-escritorio-1024x1024.png" alt="Fábio Vasconcelos Braga" class="about-photo">
           <div class="badge-seal">
-            <span class="d-big">D</span>
-            <span>DIGITAL<br>CLINICS</span>
+            <span class="d-big">22</span>
+            <span>ANOS<br>PERÍCIA</span>
           </div>
-          <div class="about-figures">
-            <div class="sil" style="width:130px;height:290px;"></div>
-            <div class="sil" style="width:120px;height:250px;background:linear-gradient(to top,#555,#333);"></div>
-          </div>
-          <div class="about-card-bottom">
-            <p>Cristiano Furtado & Hugo Baduz — Médicos e Estrategistas</p>
+          <div class="about-card-bottom" style="position:relative;z-index:3;">
+            <p>Fábio Vasconcelos Braga — Perito Criminal & Fundador da LPPerícia</p>
           </div>
         </div>
       </div>
@@ -918,22 +954,45 @@ footer p { font-size: 11px; color: #3a3a3a; }
   </div>
 </section>
 
+<!-- ─── PROVAS SOCIAIS ─── -->
+<section class="social-proof">
+  <div class="wrap">
+    <div class="social-proof-header">
+      <div class="section-tag" style="justify-content:center;">O que os alunos estão dizendo</div>
+      <h2 class="display">+5000 peritos já <em>transformaram suas carreiras</em></h2>
+    </div>
+    <div class="ps-grid">
+      <div class="ps-item"><img src="assets/provas-sociais/ps-perito-1.jpg" alt="Depoimento aluno 1"></div>
+      <div class="ps-item"><img src="assets/provas-sociais/ps-perito-2.jpg" alt="Depoimento aluno 2"></div>
+      <div class="ps-item"><img src="assets/provas-sociais/ps-perito-3.jpg" alt="Depoimento aluno 3"></div>
+      <div class="ps-item"><img src="assets/provas-sociais/ps-perito-4.jpg" alt="Depoimento aluno 4"></div>
+      <div class="ps-item"><img src="assets/provas-sociais/ps-perito-5.jpg" alt="Depoimento aluno 5"></div>
+      <div class="ps-item"><img src="assets/provas-sociais/ps-perito-6.jpg" alt="Depoimento aluno 6"></div>
+      <div class="ps-item"><img src="assets/provas-sociais/ps-perito-7.jpg" alt="Depoimento aluno 7"></div>
+      <div class="ps-item"><img src="assets/provas-sociais/ps-perito-8.jpg" alt="Depoimento aluno 8"></div>
+      <div class="ps-item"><img src="assets/provas-sociais/ps-perito-9.jpg" alt="Depoimento aluno 9"></div>
+      <div class="ps-item"><img src="assets/provas-sociais/ps-perito-10.jpg" alt="Depoimento aluno 10"></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
 <!-- ─── CTA FINAL ─── -->
 <section class="cta-final">
   <div class="cta-inner">
-    <p class="eyebrow">Vagas Limitadas Esta Semana</p>
-    <h2>Aplique agora para ter acesso<br><em>a uma das 5 vagas disponíveis</em></h2>
-    <p>Esta consultoria é individual — por isso, aceitamos apenas 5 aplicantes por semana.</p>
-    <p>Se você está decidido a se tornar um médico empreendedor de verdade, essa é a hora.</p>
-    <p class="disclaimer">Ao clicar, você será direcionado ao formulário de aplicação.</p>
+    <p class="eyebrow">Neste momento, você tem apenas duas escolhas</p>
+    <h2>Dominar a ciência forense<br><em>ou continuar no improviso</em></h2>
+    <p>Continuar apostando em métodos superficiais, correndo o risco real de ter laudos impugnados.</p>
+    <p>Ou dominar a ciência forense ao lado de um especialista e <strong style="color:var(--white);">conquistar seu Distintivo de Perito Pro.</strong></p>
+    <p class="disclaimer">Ao clicar, você será direcionado à página de inscrição segura. Pagamento 100% seguro.</p>
     <a href="#" class="btn-primary" style="font-size:13px;padding:16px 38px;">
-      Sim, Eu Quero Garantir Minha Vaga <span class="arr">→</span>
+      Quero Conquistar Meu Distintivo e Minha Carreira <span class="arr">→</span>
     </a>
     <div class="cta-vagas">
       <div class="vaga-dot"></div>
       <div class="vaga-dot"></div>
-      <div class="vaga-dot"></div>
-      <span>3 de 5 vagas preenchidas</span>
+      <span>12x de R$103,40 ou R$999,99</span>
       <div class="vaga-dot empty"></div>
       <div class="vaga-dot empty"></div>
     </div>
@@ -943,14 +1002,14 @@ footer p { font-size: 11px; color: #3a3a3a; }
 <!-- ─── FOOTER ─── -->
 <footer>
   <a href="#" class="logo">
-    <div class="logo-mark" style="width:28px;height:28px;font-size:12px;">D</div>
-    Digital<em>Clinics</em>
+    <div class="logo-mark" style="width:28px;height:28px;font-size:12px;">P</div>
+    LP<em>Perícia</em>
   </a>
   <div class="footer-links">
     <a href="#">Política de Privacidade</a>
     <a href="#">Termos de Uso</a>
   </div>
-  <p>© 2024 Digital Clinics · Todos os direitos reservados</p>
+  <p>© 2025 LPPerícia · Todos os direitos reservados</p>
   <div class="social-row">
     <a href="#" class="soc" title="YouTube">▶</a>
     <a href="#" class="soc" title="Instagram">◈</a>
