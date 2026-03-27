@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7a5520"/>
+      <stop offset="100%" stop-color="#C8913D"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="7" fill="url(#gold)"/>
+  <text
+    x="16" y="21"
+    font-family="'DM Sans', Arial, sans-serif"
+    font-size="13"
+    font-weight="900"
+    fill="#000000"
+    text-anchor="middle"
+    letter-spacing="-1"
+  >FP</text>
+</svg>
