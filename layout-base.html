@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Clinics – Médicos Especialistas em Emagrecimento</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold:       #C8913D;
+  --gold-light: #E6B96A;
+  --gold-dim:   #7a5520;
+  --gold-glow:  rgba(200,145,61,0.18);
+  --black:      #080808;
+  --surface:    #0f0f0f;
+  --surface2:   #141414;
+  --line:       rgba(255,255,255,0.07);
+  --white:      #f5f0eb;
+  --muted:      #888880;
+  --text:       #ccc8c0;
+}
+
+/* ─── BASE ─── */
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--black);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+/* ─── NOISE OVERLAY ─── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(0.92); opacity: 0.5; }
+  50%  { transform: scale(1.08); opacity: 0; }
+  100% { transform: scale(0.92); opacity: 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+.fade-up { animation: fadeUp 0.7s ease both; }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.22s; }
+.delay-3 { animation-delay: 0.34s; }
+.delay-4 { animation-delay: 0.46s; }
+
+/* ─── NAVBAR ─── */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(8,8,8,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+  padding: 0 48px;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--white);
+  letter-spacing: -0.3px;
+}
+.logo-mark {
+  width: 34px; height: 34px;
+  background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 15px; color: #000;
+  letter-spacing: -1px;
+}
+.logo em { font-style: normal; color: var(--gold); margin-left: 2px; }
+
+.btn-primary {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, #a0711e, var(--gold), #e8c070, var(--gold));
+  background-size: 250% auto;
+  color: #0a0700;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 12px 26px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-position 0.5s ease, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 0 0 0 var(--gold-glow);
+}
+.btn-primary:hover {
+  background-position: right center;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(200,145,61,0.42);
+}
+.btn-primary .arr { font-size: 15px; transition: transform 0.2s; }
+.btn-primary:hover .arr { transform: translateX(4px); }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1.5px solid var(--gold);
+  color: var(--gold);
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 12px 26px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s, transform 0.2s, box-shadow 0.3s;
+}
+.btn-secondary:hover {
+  background: var(--gold);
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(200,145,61,0.35);
+}
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 100px 48px 80px;
+  overflow: hidden;
+  text-align: center;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% -10%, rgba(200,145,61,0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(200,145,61,0.06) 0%, transparent 60%),
+    var(--black);
+}
+/* Decorative grid lines */
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 0%, transparent 70%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 780px;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  border: 1px solid rgba(200,145,61,0.35);
+  background: rgba(200,145,61,0.06);
+  color: var(--gold-light);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 7px 16px; border-radius: 40px;
+  margin-bottom: 32px;
+}
+.hero-eyebrow span { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; animation: pulse-ring 2s infinite; }
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 5.5vw, 68px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+.hero h1 .accent {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), #f0d080);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 520px;
+  margin: 0 auto 40px;
+  line-height: 1.8;
+}
+.hero-actions {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 64px;
+}
+.hero-social-proof {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  font-size: 12px; color: var(--muted);
+}
+.avatars {
+  display: flex;
+}
+.avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 2px solid var(--black);
+  margin-right: -10px;
+  background: linear-gradient(135deg, #333, #555);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: #aaa; font-weight: 600;
+}
+.hero-figures {
+  position: absolute;
+  bottom: 0; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 40px; align-items: flex-end;
+  z-index: 1; pointer-events: none;
+  opacity: 0.18;
+}
+.fig-sil {
+  background: linear-gradient(to top, #666, #333);
+  border-radius: 80px 80px 0 0;
+}
+
+/* ─── DIVIDER ─── */
+.divider {
+  height: 1px; background: var(--line);
+  position: relative; overflow: visible;
+  margin: 0;
+}
+.divider-dot {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px; height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--gold);
+}
+
+/* ─── SECTION BASE ─── */
+section { padding: 100px 48px; }
+.wrap { max-width: 1060px; margin: 0 auto; }
+
+.section-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 20px;
+}
+.section-tag::before {
+  content: ''; width: 28px; height: 1.5px;
+  background: var(--gold);
+}
+h2.display {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 4vw, 52px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--white);
+  letter-spacing: -0.5px;
+  margin-bottom: 20px;
+}
+h2.display em { font-style: italic; color: var(--gold-light); }
+.lead {
+  font-size: 15px; font-weight: 300;
+  color: var(--muted); line-height: 1.8;
+  max-width: 500px;
+}
+
+/* ─── WHAT YOU GET ─── */
+.what { background: var(--surface); }
+.what-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.what-visual {
+  position: relative;
+}
+.what-card {
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 0;
+  overflow: hidden;
+  aspect-ratio: 4/3.2;
+  display: flex; align-items: flex-end;
+  position: relative;
+}
+.what-card-inner {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(200,145,61,0.06) 0%, transparent 60%);
+  display: flex; align-items: center; justify-content: center;
+}
+/* SVG illustration inside card */
+.what-card-inner svg { opacity: 0.4; }
+.what-card-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(15,15,15,0.95));
+  padding: 28px 24px 24px;
+}
+.what-card-overlay p {
+  font-size: 12px; color: var(--muted);
+  font-style: italic;
+}
+.badge-corner {
+  position: absolute; top: 20px; left: 20px;
+  width: 44px; height: 44px;
+  background: var(--gold);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 8px 24px rgba(200,145,61,0.4);
+}
+.what-content p {
+  color: var(--text);
+  font-weight: 300;
+  margin-bottom: 14px;
+}
+.what-content p strong { color: var(--white); font-weight: 600; }
+.what-content .highlight-line {
+  border-left: 2px solid var(--gold);
+  padding-left: 16px;
+  color: var(--white);
+  font-size: 14px;
+  font-style: italic;
+  margin: 24px 0;
+}
+
+/* ─── TICKER ─── */
+.ticker {
+  background: var(--black);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 13px 0;
+  overflow: hidden;
+}
+.ticker-track {
+  display: flex;
+  white-space: nowrap;
+  animation: ticker 30s linear infinite;
+}
+.ticker-track span {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: rgba(255,255,255,0.1);
+  padding: 0 28px;
+}
+.ticker-track span.accent-tick {
+  color: var(--gold-dim);
+}
+
+/* ─── FOR WHO ─── */
+.for-who { background: var(--black); }
+.for-who-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.item-card {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 20px 22px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  margin-bottom: 12px;
+  transition: border-color 0.25s, background 0.25s, transform 0.25s;
+  cursor: default;
+}
+.item-card:hover {
+  border-color: rgba(200,145,61,0.45);
+  background: rgba(200,145,61,0.04);
+  transform: translateX(6px);
+}
+.item-num {
+  min-width: 32px; height: 32px;
+  background: transparent;
+  border: 1.5px solid var(--gold-dim);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  color: var(--gold);
+  margin-top: 1px;
+}
+.item-card p {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.55;
+}
+.for-who-cta-block {
+  margin-top: 32px;
+  padding: 24px;
+  background: var(--gold-glow);
+  border: 1px solid rgba(200,145,61,0.2);
+  border-radius: 10px;
+  font-size: 12px; color: var(--muted);
+  font-style: italic;
+  margin-bottom: 24px;
+}
+
+/* ─── DELIVERABLES ─── */
+.deliverables { background: var(--surface); }
+.deliver-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 48px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.deliver-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.d-card {
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 28px 24px;
+  transition: border-color 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.d-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.d-card:hover { border-color: rgba(200,145,61,0.4); transform: translateY(-4px); }
+.d-card:hover::before { opacity: 1; }
+.d-icon {
+  width: 42px; height: 42px;
+  background: linear-gradient(135deg, rgba(200,145,61,0.12), rgba(200,145,61,0.05));
+  border: 1px solid rgba(200,145,61,0.2);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+.d-card h4 {
+  font-size: 14px; font-weight: 600;
+  color: var(--white);
+  line-height: 1.45;
+}
+.deliver-note {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 12px; color: var(--muted);
+  font-style: italic;
+}
+
+/* ─── ABOUT ─── */
+.about { background: var(--black); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 80px;
+  align-items: center;
+}
+.check-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 12px;
+  margin: 24px 0;
+}
+.check-list li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 14px; color: var(--text); line-height: 1.6;
+}
+.check-list li::before {
+  content: '';
+  min-width: 18px; height: 18px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none'%3E%3Ccircle cx='9' cy='9' r='8.5' stroke='%23C8913D' stroke-opacity='.5'/%3E%3Cpath d='M5.5 9l2.5 2.5 4.5-5' stroke='%23C8913D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+  margin-top: 2px;
+}
+.about-visual {
+  position: relative;
+}
+.about-card {
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  position: relative;
+  display: flex; align-items: flex-end;
+}
+.about-card-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, #1e1a12, #0f0f0f);
+}
+.about-figures {
+  position: absolute; inset: 0;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 0; gap: 16px;
+}
+.sil {
+  background: linear-gradient(to top, #666, #404040);
+  border-radius: 70px 70px 0 0;
+}
+.about-card-bottom {
+  position: relative; z-index: 2;
+  padding: 24px;
+  background: linear-gradient(transparent, rgba(8,8,8,0.98));
+  width: 100%;
+}
+.about-card-bottom p {
+  font-size: 12px; color: var(--muted);
+}
+.badge-seal {
+  position: absolute; top: -20px; right: -20px;
+  width: 80px; height: 80px;
+  background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  font-size: 8px; font-weight: 800;
+  color: #000;
+  line-height: 1.3;
+  border: 3px solid var(--black);
+  box-shadow: 0 8px 28px rgba(200,145,61,0.45);
+  animation: float 3s ease-in-out infinite;
+}
+.badge-seal .d-big { font-size: 20px; font-weight: 900; line-height: 1; }
+
+/* ─── CTA FINAL ─── */
+.cta-final {
+  position: relative;
+  background: var(--surface);
+  padding: 120px 48px;
+  text-align: center;
+  overflow: hidden;
+}
+.cta-final::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at 50% 50%, rgba(200,145,61,0.14) 0%, transparent 70%);
+}
+.cta-final::after {
+  content: '';
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 80px;
+  background: linear-gradient(transparent, var(--gold), transparent);
+}
+.cta-inner { position: relative; z-index: 2; }
+.cta-final .eyebrow {
+  display: inline-block;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+.cta-final h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(34px, 5vw, 60px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--white);
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+}
+.cta-final h2 em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.cta-final p {
+  font-size: 15px; font-weight: 300;
+  color: var(--muted);
+  max-width: 480px; margin: 0 auto 12px;
+}
+.cta-final .disclaimer {
+  font-size: 11px; color: #555;
+  font-style: italic; margin-bottom: 36px;
+}
+.cta-vagas {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin-top: 28px;
+}
+.vaga-dot {
+  width: 10px; height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--gold);
+}
+.vaga-dot.empty {
+  background: transparent;
+  border: 1.5px solid #333;
+  box-shadow: none;
+}
+.cta-vagas span {
+  font-size: 11px; letter-spacing: 1.5px; color: var(--muted);
+  text-transform: uppercase; margin: 0 8px;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--black);
+  border-top: 1px solid var(--line);
+  padding: 28px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+footer p { font-size: 11px; color: #3a3a3a; }
+.footer-links {
+  display: flex; gap: 24px;
+}
+.footer-links a {
+  font-size: 11px; color: #3a3a3a;
+  text-decoration: none; letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--gold); }
+.social-row {
+  display: flex; gap: 10px;
+}
+.soc {
+  width: 32px; height: 32px;
+  border: 1px solid #222;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: #444;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.soc:hover { border-color: var(--gold); color: var(--gold); }
+
+@media (max-width: 860px) {
+  nav { padding: 0 20px; }
+  section { padding: 70px 24px; }
+  .what-grid, .for-who-grid, .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .deliver-grid { grid-template-columns: 1fr 1fr; }
+  .hero { padding: 80px 24px 60px; }
+  footer { padding: 24px 20px; }
+  .deliver-header { flex-direction: column; align-items: flex-start; }
+  .for-who-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 540px) {
+  .deliver-grid { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAVBAR ─── -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-mark">D</div>
+    Digital<em>Clinics</em>
+  </a>
+  <a href="#" class="btn-primary">
+    Quero Meu Diagnóstico <span class="arr">→</span>
+  </a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow fade-up">
+      <span></span> Método validado por médicos especialistas
+    </div>
+    <h1 class="fade-up delay-1">
+      Médicos Lotando a Agenda<br>
+      <span class="accent">e Faturando Alto com<br>Seus Protocolos</span>
+    </h1>
+    <p class="hero-sub fade-up delay-2">
+      Receba um plano de ação gratuito, validado e personalizado para atrair pacientes todos os dias — mesmo sem ser famoso no Instagram.
+    </p>
+    <div class="hero-actions fade-up delay-3">
+      <a href="#" class="btn-primary">Quero Fazer Meu Diagnóstico <span class="arr">→</span></a>
+      <a href="#o-que-receber" class="btn-secondary">Saiba Mais</a>
+    </div>
+    <div class="hero-social-proof fade-up delay-4">
+      <div class="avatars">
+        <div class="avatar">CM</div>
+        <div class="avatar" style="background:linear-gradient(135deg,#3a3a3a,#666);">RB</div>
+        <div class="avatar" style="background:linear-gradient(135deg,#444,#777);">LF</div>
+      </div>
+      <p>+200 médicos especialistas já transformaram seus resultados</p>
+    </div>
+  </div>
+  <!-- decorative silhouettes -->
+  <div class="hero-figures">
+    <div class="fig-sil" style="width:130px;height:280px;"></div>
+    <div class="fig-sil" style="width:110px;height:240px;background:linear-gradient(to top,#555,#2a2a2a);"></div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- ─── O QUE VOCÊ VAI RECEBER ─── -->
+<section class="what" id="o-que-receber">
+  <div class="wrap">
+    <div class="what-grid">
+      <div class="what-visual">
+        <div class="what-card">
+          <div class="badge-corner">↗</div>
+          <div class="what-card-inner">
+            <svg width="240" height="180" viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="30" width="90" height="120" rx="8" fill="#C8913D" fill-opacity="0.3" stroke="#C8913D" stroke-opacity="0.4" stroke-width="1"/>
+              <rect x="130" y="60" width="90" height="120" rx="8" fill="#888" fill-opacity="0.15" stroke="#555" stroke-width="1"/>
+              <circle cx="65" cy="20" r="16" fill="#555"/>
+              <circle cx="175" cy="50" r="16" fill="#444"/>
+              <line x1="20" y1="168" x2="220" y2="168" stroke="#333" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="what-card-overlay">
+            <p>Sessão estratégica individual com especialistas</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="what-content">
+        <div class="section-tag">O que você recebe</div>
+        <h2 class="display">O que você está<br><em>prestes a receber</em></h2>
+        <p>Esta é uma sessão estratégica individual, feita com especialistas que são médicos como você, onde vamos te mostrar exatamente o que está travando o crescimento do seu consultório.</p>
+        <p>Você sairá com um plano de ação sob medida, estruturado por quem fatura alto com medicina e marketing digital.</p>
+        <div class="highlight-line">
+          Sem enrolação. Sem fórmulas genéricas. Direto ao ponto.
+        </div>
+        <a href="#" class="btn-primary">Sim, Eu Quero Aumentar Meu Faturamento <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TICKER ─── -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>DIGITAL CLINICS</span>
+    <span class="accent-tick">✦</span>
+    <span>DIGITAL CLINICS</span>
+    <span class="accent-tick">✦</span>
+    <span>DIGITAL CLINICS</span>
+    <span class="accent-tick">✦</span>
+    <span>DIGITAL CLINICS</span>
+    <span class="accent-tick">✦</span>
+    <span>DIGITAL CLINICS</span>
+    <span class="accent-tick">✦</span>
+    <span>DIGITAL CLINICS</span>
+    <span class="accent-tick">✦</span>
+    <span>DIGITAL CLINICS</span>
+    <span class="accent-tick">✦</span>
+    <span>DIGITAL CLINICS</span>
+    <span class="accent-tick">✦</span>
+    <span>DIGITAL CLINICS</span>
+    <span class="accent-tick">✦</span>
+    <span>DIGITAL CLINICS</span>
+    <span class="accent-tick">✦</span>
+    <span>DIGITAL CLINICS</span>
+    <span class="accent-tick">✦</span>
+    <span>DIGITAL CLINICS</span>
+    <span class="accent-tick">✦</span>
+    <span>DIGITAL CLINICS</span>
+    <span class="accent-tick">✦</span>
+    <span>DIGITAL CLINICS</span>
+    <span class="accent-tick">✦</span>
+  </div>
+</div>
+
+<!-- ─── PARA QUEM É ─── -->
+<section class="for-who">
+  <div class="wrap">
+    <div class="for-who-grid">
+      <div>
+        <div class="section-tag">Para quem é</div>
+        <h2 class="display">Essa consultoria é <em>para médicos especialistas em emagrecimento</em> que:</h2>
+        <div class="for-who-cta-block">
+          Se você se encaixa em um ou mais desses pontos, essa sessão gratuita foi criada para você.
+        </div>
+        <a href="#" class="btn-primary">Sim, Eu Quero Aumentar Meu Faturamento <span class="arr">→</span></a>
+      </div>
+
+      <div>
+        <div class="item-card">
+          <div class="item-num">01</div>
+          <p>Querem atrair mais pacientes com previsibilidade</p>
+        </div>
+        <div class="item-card">
+          <div class="item-num">02</div>
+          <p>Desejam aumentar o faturamento com protocolos próprios de alto valor</p>
+        </div>
+        <div class="item-card">
+          <div class="item-num">03</div>
+          <p>Estão prontos para se posicionar como referência na área de emagrecimento</p>
+        </div>
+        <div class="item-card">
+          <div class="item-num">04</div>
+          <p>Sentem que estão fazendo tudo no digital, mas sem retorno real</p>
+        </div>
+        <div class="item-card">
+          <div class="item-num">05</div>
+          <p>Precisam organizar sua estrutura online e transformar audiência em consultas pagas</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- ─── O QUE SERÁ ENTREGUE ─── -->
+<section class="deliverables">
+  <div class="wrap">
+    <div class="deliver-header">
+      <div>
+        <div class="section-tag">O que será entregue</div>
+        <h2 class="display">O que você recebe na<br><em>sessão gratuita</em></h2>
+      </div>
+      <p class="lead" style="max-width:320px;">Uma sessão com valor real de mercado, oferecida gratuitamente por tempo limitado.</p>
+    </div>
+
+    <div class="deliver-grid">
+      <div class="d-card">
+        <div class="d-icon">🔍</div>
+        <h4>Diagnóstico completo do seu posicionamento atual</h4>
+      </div>
+      <div class="d-card">
+        <div class="d-icon">📊</div>
+        <h4>Análise do seu funil de atração e conversão de pacientes</h4>
+      </div>
+      <div class="d-card">
+        <div class="d-icon">📱</div>
+        <h4>Estratégia de autoridade para o Instagram e canais complementares</h4>
+      </div>
+      <div class="d-card">
+        <div class="d-icon">📋</div>
+        <h4>Roteiro para vender seus protocolos com previsibilidade</h4>
+      </div>
+      <div class="d-card">
+        <div class="d-icon">🛠️</div>
+        <h4>Indicação das ferramentas certas para acelerar seu crescimento</h4>
+      </div>
+      <div class="d-card">
+        <div class="d-icon">🗓️</div>
+        <h4>Plano de ação personalizado, enviado ao final do call</h4>
+      </div>
+    </div>
+    <p class="deliver-note">Essa sessão tem valor real de mercado — e ainda assim está sendo oferecida sem custo por tempo limitado.</p>
+    <div style="text-align:center;margin-top:32px;">
+      <a href="#" class="btn-primary">Quero o Meu Plano de Ação Gratuito <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── QUEM ESTÁ POR TRÁS ─── -->
+<section class="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <div class="section-tag">Quem somos</div>
+        <h2 class="display">Quem está por trás da <em>Digital Clinics?</em></h2>
+        <p style="font-weight:300;color:var(--text);margin-bottom:14px;">Somos Cristiano Furtado e Hugo Baduz — médicos de formação, mas <strong style="color:var(--white);font-weight:600;">estrategistas por vocação</strong>.</p>
+        <p style="font-weight:300;color:var(--text);">Nos últimos anos, nos especializamos em vendas online, estruturação de protocolos de alto valor e estratégias de crescimento para médicos especialistas.</p>
+        <ul class="check-list">
+          <li>Juntos, já faturamos múltiplos 7 dígitos com vendas digitais na área de saúde</li>
+          <li>Aplicamos cada estratégia em nossos próprios projetos antes de ensinar qualquer médico</li>
+          <li>A Digital Clinics nasceu para ajudar médicos a saírem da estagnação e construírem um negócio lucrativo e previsível</li>
+          <li>Estruture seus protocolos, conquiste autoridade real e atraia pacientes com consistência</li>
+        </ul>
+      </div>
+
+      <div class="about-visual">
+        <div class="about-card">
+          <div class="about-card-bg"></div>
+          <div class="badge-seal">
+            <span class="d-big">D</span>
+            <span>DIGITAL<br>CLINICS</span>
+          </div>
+          <div class="about-figures">
+            <div class="sil" style="width:130px;height:290px;"></div>
+            <div class="sil" style="width:120px;height:250px;background:linear-gradient(to top,#555,#333);"></div>
+          </div>
+          <div class="about-card-bottom">
+            <p>Cristiano Furtado & Hugo Baduz — Médicos e Estrategistas</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA FINAL ─── -->
+<section class="cta-final">
+  <div class="cta-inner">
+    <p class="eyebrow">Vagas Limitadas Esta Semana</p>
+    <h2>Aplique agora para ter acesso<br><em>a uma das 5 vagas disponíveis</em></h2>
+    <p>Esta consultoria é individual — por isso, aceitamos apenas 5 aplicantes por semana.</p>
+    <p>Se você está decidido a se tornar um médico empreendedor de verdade, essa é a hora.</p>
+    <p class="disclaimer">Ao clicar, você será direcionado ao formulário de aplicação.</p>
+    <a href="#" class="btn-primary" style="font-size:13px;padding:16px 38px;">
+      Sim, Eu Quero Garantir Minha Vaga <span class="arr">→</span>
+    </a>
+    <div class="cta-vagas">
+      <div class="vaga-dot"></div>
+      <div class="vaga-dot"></div>
+      <div class="vaga-dot"></div>
+      <span>3 de 5 vagas preenchidas</span>
+      <div class="vaga-dot empty"></div>
+      <div class="vaga-dot empty"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <a href="#" class="logo">
+    <div class="logo-mark" style="width:28px;height:28px;font-size:12px;">D</div>
+    Digital<em>Clinics</em>
+  </a>
+  <div class="footer-links">
+    <a href="#">Política de Privacidade</a>
+    <a href="#">Termos de Uso</a>
+  </div>
+  <p>© 2024 Digital Clinics · Todos os direitos reservados</p>
+  <div class="social-row">
+    <a href="#" class="soc" title="YouTube">▶</a>
+    <a href="#" class="soc" title="Instagram">◈</a>
+    <a href="#" class="soc" title="Facebook">f</a>
+  </div>
+</footer>
+
+</body>
+</html>
