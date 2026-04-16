@@ -1,0 +1,28 @@
+arquivo principal da página é "index.html"
+
+A versão atual da plugin está correta.
+Preciso das seguintes atualizações:
+
+- O link que vai no card "Documentoscopia...disponível agora" é o https://pay.herospark.com/formacao-grafo-doc-perito-pro-503736.
+- Todos os botões além do card de compra citado acima precisa posicionar o scroll para o card de compra no final da página.
+- No texto dos alunos, mudar para +3.000 alunos.
+- Mudar para: Apostar sua carreira em métodos rasos... Tira o “Por que” do início da frase. Ficou sem conexão com a frase seguinte.
+- Acho melhor tirarmos “segunda carreira” e deixarmos somente “quem busca uma carreira sólida na perícia judicial.
+Alterar no texto principal e no texto que acompanha.
+- A carga horária do certificado será de 160h. Estamos encapsulando 02 cursos de 80h neste produto principal.
+- Mudar para +3.000 peritos quando aparecer.
+- Mudar o nome do produto para “GRAFOSCOPIA E DOCUMENTOSCOPIA”. coloque um subtítulo abaixo desse título principal: “Formação GRAFODOC Perito Pro”.
+
+
+Antes de implementar:
+1. Liste quais funções/arquivos serão modificados
+2. Liste quais funções dependem das que serão alteradas
+3. Identifique riscos de regressão
+4. Identifique riscos de segurança introduzidos pelas mudanças
+5. Aguarde minha confirmação antes de escrever qualquer código
+
+Regras de desenvolvimento:
+- Modifique APENAS o que foi listado acima
+- Não refatore, renomeie ou reorganize nada além do solicitado
+- Se identificar algo que pode quebrar, me avise antes de prosseguir
+- Mantenha o mesmo padrão de código já existente
